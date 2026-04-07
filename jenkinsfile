@@ -1,0 +1,11 @@
+pipeline {
+    agent any
+    stages {
+        stage('git clone') {
+            steps {
+                echo 'Building...'
+                git branch: 'main', url: 'https://github.com/Java-Techie-jt/devops-automation.git'
+            }
+        }
+    }
+}

@@ -7,6 +7,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'demo-app'
+        DOCKER_USER = 'rahulkumar9536'
     }
 
     stages {

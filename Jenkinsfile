@@ -21,5 +21,13 @@ pipeline {
                 sh 'docker build -t demo-app:latest .'
             }
         }
+       stage('Push to DockerHub') {
+            steps {
+                sh '''
+                docker tag demo-app $DOCKER_USER/demo-app
+                docker push $DOCKER_USER/demo-app
+                '''
+            }
+        }
     }
 }

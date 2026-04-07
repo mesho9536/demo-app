@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        DOCKER_USER = 'rahulkumar9536'
+        DOCKER_IMAGE = 'demo-app'
     }
 
     stages {
@@ -31,6 +31,22 @@ pipeline {
                 sh 'docker version'
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                echo 'Building Docker image...'
+                sh 'docker build -t ${DOCKER_USER}/demo-app:latest .'
+            }
+        }
+        stage('Push Docker Image') {
+            steps {
+                echo 'Pushing Docker image to registry...'
+                withCredentials([usernamePassword(credentialsId: 'docker-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                    sh 'docker push ${DOCKER_USER}/demo-app:latest'
+                }
+            }
+        }
 
     }
 }
+

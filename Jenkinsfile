@@ -3,6 +3,9 @@ pipeline {
     tools {
         maven 'maven-3.9.14'
     }
+    environment {
+        DOCKER_USER = 'rahulkumar9536'
+    }
     stages {
         stage('git clone') {
             steps {

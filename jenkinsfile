@@ -4,7 +4,7 @@ pipeline {
         stage('git clone') {
             steps {
                 echo 'Building...'
-                git branch: 'main', url: 'https://github.com/Java-Techie-jt/devops-automation.git'
+                git branch: 'master', url: 'https://github.com/mesho9536/demo-app.git'
             }
         }
     }

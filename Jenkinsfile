@@ -1,36 +1,36 @@
 pipeline {
     agent any
+
     tools {
         maven 'maven-3.9.14'
     }
+
     environment {
         DOCKER_USER = 'rahulkumar9536'
     }
+
     stages {
+
         stage('git clone') {
             steps {
-                echo 'Building...'
+                echo 'Cloning repository...'
                 git branch: 'master', url: 'https://github.com/mesho9536/demo-app.git'
             }
         }
+
         stage('build') {
             steps {
-                echo 'Building...'
+                echo 'Building project...'
                 sh 'mvn clean package -DskipTests'
             }
         }
-        stage('Build Docker Image') {
+
+        stage('Check Docker') {
             steps {
-                sh 'docker build -t demo-app:latest .'
+                sh 'whoami'
+                sh 'docker version'
             }
         }
-       stage('Push to DockerHub') {
-            steps {
-                sh '''
-                docker tag demo-app $DOCKER_USER/demo-app
-                docker push $DOCKER_USER/demo-app
-                '''
-            }
-        }
+
     }
 }

@@ -16,5 +16,10 @@ pipeline {
                 sh 'mvn clean package -DskipTests'
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t demo-app:latest .'
+            }
+        }
     }
 }
